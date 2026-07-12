@@ -1,5 +1,6 @@
 package com.navira.contactus.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -17,12 +18,12 @@ public class Contact {
     String email;
     String phone;
     String message;
-    Date createdAt;
+    LocalDateTime createdAt;
     
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
     public Long getId() {
