@@ -2,7 +2,6 @@ package com.navira.contactus.service;
 
 import java.time.LocalDateTime;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.navira.contactus.dto.ContactRequestDto;
@@ -19,7 +18,7 @@ public class ContactService {
         Contact newContact = mapToEntity(request);
         Contact savedItem = this.contactRepository.save(newContact);
 
-        return mapToDto(savedItem);
+        return mapToDto(newContact);
     }
 
     private Contact mapToEntity(ContactRequestDto contactRequestDto) {

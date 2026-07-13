@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.navira.contactus.dto.ContactRequestDto;
 import com.navira.contactus.dto.ContactResponseDto;
+import com.navira.contactus.service.ContactService;
 
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
 
-    @GetMapping("/all")
+    private ContactService contactService;
+    @GetMapping("")
     public ResponseEntity<String> getContacts(){
         return ResponseEntity.ok("Hello from server");
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public ResponseEntity<ContactResponseDto> createNewContact(@RequestBody ContactRequestDto requestData){
-
-        return ResponseEntity.ok(null);
+        ContactResponseDto response = this.contactService.createNew(requestData);
+        return ResponseEntity.ok(response);
     }
 }

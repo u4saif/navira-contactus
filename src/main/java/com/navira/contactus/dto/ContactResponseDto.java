@@ -11,7 +11,7 @@ public class ContactResponseDto {
     long id;
 
     @NotBlank
-    Date createdAt;
+    LocalDateTime createdAt;
 
     @NotBlank
     String message;
@@ -24,7 +24,7 @@ public class ContactResponseDto {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
