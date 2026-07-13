@@ -1,5 +1,8 @@
 package com.navira.contactus.controller;
 
+import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,18 +15,23 @@ import com.navira.contactus.dto.ContactResponseDto;
 import com.navira.contactus.service.ContactService;
 
 @RestController
-@RequestMapping("/contact")
+@RequestMapping("/contacts")
 public class ContactController {
 
-    private ContactService contactService;
-    @GetMapping("")
-    public ResponseEntity<String> getContacts(){
-        return ResponseEntity.ok("Hello from server");
+    private final ContactService contactService;
+
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<ContactResponseDto> createNewContact(@RequestBody ContactRequestDto requestData){
+    @GetMapping
+    public ResponseEntity<?> getContacts() {
+        return ResponseEntity.ok().body(java.util.Map.of("message", "Hello from server"));
+    }
+
+    @PostMapping
+    public ResponseEntity<ContactResponseDto> createNewContact(@Valid @RequestBody ContactRequestDto requestData) {
         ContactResponseDto response = this.contactService.createNew(requestData);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

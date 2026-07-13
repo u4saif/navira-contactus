@@ -12,32 +12,34 @@ import com.navira.contactus.repository.ContactRepository;
 @Service
 public class ContactService {
 
-    private ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
+
+    public ContactService(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
 
     public ContactResponseDto createNew(ContactRequestDto request) {
         Contact newContact = mapToEntity(request);
-        Contact savedItem = this.contactRepository.save(newContact);
+        Contact savedContact = this.contactRepository.save(newContact);
 
-        return mapToDto(newContact);
+        return mapToDto(savedContact);
     }
 
     private Contact mapToEntity(ContactRequestDto contactRequestDto) {
         Contact newItem = new Contact();
         newItem.setName(contactRequestDto.getName());
         newItem.setEmail(contactRequestDto.getEmail());
-        newItem.setCreatedAt(LocalDateTime.now());
         newItem.setPhone(contactRequestDto.getPhone());
-        return  newItem;
+        newItem.setMessage(contactRequestDto.getMessage());
+        newItem.setCreatedAt(LocalDateTime.now());
+        return newItem;
     }
 
-     private ContactResponseDto mapToDto(Contact contact) {
+    private ContactResponseDto mapToDto(Contact contact) {
         ContactResponseDto responseDto = new ContactResponseDto();
-
-        responseDto.setId(contact.getId());  
+        responseDto.setId(contact.getId());
         responseDto.setMessage("Details saved successfully. Team will contact shortly");
-        responseDto.setCreatedAt(contact.getCreatedAt()); 
-
+        responseDto.setCreatedAt(contact.getCreatedAt());
         return responseDto;
-
     }
 }

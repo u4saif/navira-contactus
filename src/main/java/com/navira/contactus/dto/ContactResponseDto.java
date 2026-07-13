@@ -1,20 +1,12 @@
 package com.navira.contactus.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import jakarta.validation.constraints.NotBlank;
 
 public class ContactResponseDto {
 
-    @NotBlank
-    long id;
-
-    @NotBlank
-    LocalDateTime createdAt;
-
-    @NotBlank
-    String message;
+    private long id;
+    private LocalDateTime createdAt;
+    private String message;
 
     public long getId() {
         return id;
@@ -39,5 +31,4 @@ public class ContactResponseDto {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

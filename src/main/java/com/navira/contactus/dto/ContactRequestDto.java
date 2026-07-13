@@ -1,27 +1,31 @@
 package com.navira.contactus.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class ContactRequestDto {
-    @NotBlank
-    String name;
 
-    @Email
-    String email;
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    private String name;
 
-    @NotBlank
-    @Min(10)
-    String phone;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    private String email;
 
-    @NotBlank
-    String message;
-    
-     @NotBlank
-    Date createdAt;
+    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9]{10,15}$", message = "Phone must contain 10 to 15 digits")
+    private String phone;
+
+    @NotBlank(message = "Message is required")
+    @Size(min = 5, max = 1000, message = "Message must be between 5 and 1000 characters")
+    private String message;
+
+    private LocalDateTime createdAt;
 
     public String getName() {
         return name;
@@ -55,12 +59,11 @@ public class ContactRequestDto {
         this.message = message;
     }
 
-    public Date getCreatedAt() {
-    return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
 }
