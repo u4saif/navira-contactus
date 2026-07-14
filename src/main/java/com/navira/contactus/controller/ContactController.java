@@ -2,6 +2,7 @@ package com.navira.contactus.controller;
 
 import javax.validation.Valid;
 
+import com.navira.contactus.entity.Contact;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.navira.contactus.dto.ContactRequestDto;
 import com.navira.contactus.dto.ContactResponseDto;
 import com.navira.contactus.service.ContactService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/contacts")
@@ -26,7 +29,8 @@ public class ContactController {
 
     @GetMapping
     public ResponseEntity<?> getContacts() {
-        return ResponseEntity.ok().body("Hello from server");
+        List<Contact> list =  this.contactService.fetchAllContacts();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @PostMapping
