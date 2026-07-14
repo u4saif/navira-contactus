@@ -1,6 +1,6 @@
 package com.navira.contactus.controller;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class ContactController {
 
     @GetMapping
     public ResponseEntity<?> getContacts() {
-        return ResponseEntity.ok().body(java.util.Map.of("message", "Hello from server"));
+        return ResponseEntity.ok().body("Hello from server");
     }
 
     @PostMapping
