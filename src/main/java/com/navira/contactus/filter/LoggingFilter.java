@@ -23,9 +23,12 @@ public class LoggingFilter implements Filter {
         System.out.print("Request URI: " + newReq.getRequestURI() +"\n");
         System.out.println("Status code:"+newRes.getStatus());
         newRes.setHeader("X-reqID",reqId);
-        filterChain.doFilter(servletRequest, servletResponse);
-        Long endTime = System.currentTimeMillis();
-        long differenceTime  = endTime - startTime;
-        System.out.println("Time taken: " + differenceTime + " (ms)");
+        try{
+            filterChain.doFilter(servletRequest, servletResponse);
+        }finally {
+            Long endTime = System.currentTimeMillis();
+            long differenceTime  = endTime - startTime;
+            System.out.println("Time taken: " + differenceTime + " (ms)");
+        }
     }
 }
