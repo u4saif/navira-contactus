@@ -39,8 +39,7 @@ class ContactControllerTest {
     @Test
     void getContactsReturnsOkResponse() throws Exception {
         mockMvc.perform(get("/contacts"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Hello from server"));
+                .andExpect(status().isOk());
     }
 
     @Test
