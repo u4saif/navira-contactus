@@ -28,8 +28,9 @@ public class ContactController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getContacts() {
+    public ResponseEntity<?> getContacts() throws InterruptedException {
         List<Contact> list =  this.contactService.fetchAllContacts();
+//        Thread.sleep(2000);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
